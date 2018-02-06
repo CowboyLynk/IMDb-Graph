@@ -8,6 +8,6 @@ TV show ratings graphs using IMDb ratings. Inspired by GraphTV
 
 3. Run main.py and enter the IMDb id for your desired show. To find the IMDb ID simply go to the show's IMDb url and copy the code that starts with 'tt.......'
 
-Example:
+## Example
 
 ![Example](example.png)
