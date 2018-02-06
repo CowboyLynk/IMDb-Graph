@@ -10,4 +10,4 @@ Finally, run main.py and enter the IMDb id for your desired show. To find the IM
 
 Example:
 
-![Example](cowboylynk.github.com/IMDb-Graph/img/example.jpg)
+![Example](cowboylynk.github.com/IMDb-Graph/example.png)
