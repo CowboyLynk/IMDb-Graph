@@ -10,4 +10,4 @@ TV show ratings graphs using IMDb ratings. Inspired by GraphTV
 
 Example:
 
-![Example](cowboylynk.https://www.github.com/cowboylynk/IMDb-Graph/blob/master/example.png)
+![Example](example.png)
