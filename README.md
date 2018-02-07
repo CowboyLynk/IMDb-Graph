@@ -2,7 +2,7 @@
 TV show ratings graphs using IMDb ratings. Inspired by GraphTV
 
 ## Getting Started
-1. Download 'title.basics.tsv', '', and '' from this link: https://datasets.imdbws.com/
+1. Download 'title.basics.tsv', 'title.episode.tsv', and 'title.ratings.tsv' from this link: https://datasets.imdbws.com/
 
 2. Run the parsing.py file. It will create a json file called 'show_data.json'
 
