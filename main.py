@@ -115,5 +115,7 @@ while request != 'quit':
 
 	fig.canvas.mpl_connect("motion_notify_event", hover)
 	plt.title(show_name)
+	plt.ylabel("IMDb Rating")
+	plt.xlabel("Episode Number")
 
 	plt.show()
