@@ -58,3 +58,13 @@ def get_show_data():
 		f.write(json.dumps(episodes))
 
 get_show_data()
+
+names = {}
+for show_id in titles:
+	names[titles[show_id]] = show_id
+
+with open('id_to_name_mapping.json', 'w') as f:
+	f.write(json.dumps(titles))
+
+with open('name_to_id_mapping.json', 'w') as f:
+	f.write(json.dumps(names))

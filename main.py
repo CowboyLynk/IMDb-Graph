@@ -2,6 +2,16 @@ import matplotlib.pyplot as plt
 import numpy as np
 import json
 
+
+print("Loading data... Please be patient.")
+
+"""
+with open('name_to_id_mapping.json', 'r') as f:
+	name_to_id_mapping = json.loads(f.read())
+"""
+with open('id_to_name_mapping.json', 'r') as f:
+	id_to_name_mapping = json.loads(f.read())
+
 with open('show_data.json', 'r') as f:
 	db = json.loads(f.read())
 request = None
@@ -23,13 +33,24 @@ def get_ep_ratings(show_id):
 
 while request != 'quit':
 	color_choices = ['magenta', 'red', 'blue', 'green', 'purple', 'cyan']
-	show_id = input('Search by id: ')
+	show_id = input('Enter IMDb id: ')
+
+	if show_id[0:2] == "tt":
+		show_name = id_to_name_mapping[show_id]
 
 	x = []
 	y = []
 	c = []
 
-	ratings = get_ep_ratings(show_id)
+	try:
+		ratings = get_ep_ratings(show_id)
+	except KeyError:
+		print('Show not found, please try again.')
+		continue
+
+	print("Showing data for:", show_name)
+	print()
+
 	episodes = []
 	fig, ax = plt.subplots()
 
@@ -93,5 +114,6 @@ while request != 'quit':
 
 
 	fig.canvas.mpl_connect("motion_notify_event", hover)
+	plt.title(show_name)
 
 	plt.show()
