@@ -57,29 +57,34 @@ while request != 'quit':
 	ep_counter = 0
 	for season_num, season in enumerate(ratings):
 
-		color = color_choices[season_num % len(color_choices)]
-		season.sort(key=lambda x: x[0])
+		try:
+			color = color_choices[season_num % len(color_choices)]
+			season.sort(key=lambda x: x[0])
 
-		season_episodes = []
-		for episode_num, episode in enumerate(season):
-			if episode[1] is None:
+			season_episodes = []
+			for episode_num, episode in enumerate(season):
+				if episode[1] is None:
+					continue
+				episode.append((season_num+1, episode_num+1))
+				season_episodes.append(episode)
+			episodes += season_episodes
+
+			# linear regression stuff
+			x_range = [x + ep_counter for x in range(len(season_episodes))]
+			y_points = [x[1] for x in season_episodes if x[1]]
+			if len(x_range) == 0:
 				continue
-			episode.append((season_num+1, episode_num+1))
-			season_episodes.append(episode)
-		episodes += season_episodes
+			fit = np.polyfit(x_range, y_points, 1)
+			fit_fn = np.poly1d(fit)
+			plt.plot(x_range, [fit_fn(x) for x in x_range], color=color)
 
-		# linear regression stuff
-		x_range = [x + ep_counter for x in range(len(season_episodes))]
-		y_points = [x[1] for x in season_episodes if x[1]]
-		fit = np.polyfit(x_range, y_points, 1)
-		fit_fn = np.poly1d(fit)
-		plt.plot(x_range, [fit_fn(x) for x in x_range], color=color)
+			x.extend(x_range)
+			y.extend(y_points)
+			c.extend([color for _ in range(len(season_episodes))])
 
-		x.extend(x_range)
-		y.extend(y_points)
-		c.extend([color for _ in range(len(season_episodes))])
-
-		ep_counter += len(season)
+			ep_counter += len(season)
+		except:
+			continue
 
 	sc = plt.scatter(x, y, c=c)
 
